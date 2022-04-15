@@ -1,0 +1,19 @@
+.Nav{
+
+
+    width:80%;
+    height:90px;
+    display: flex;
+  margin: auto;
+    justify-content: space-between;
+    padding-top: 50px;
+   
+ 
+ 
+}
+.Nav img {
+    height: 90px;
+    width:90px;
+    object-fit: contain;
+  margin-top: -40px;
+}

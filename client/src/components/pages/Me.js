@@ -18,13 +18,14 @@ const Me = () => {
     const navigate = useNavigate()
     useEffect(()=>{
 setData(currentUser)
-
 console.log(currentUser)
+
+
 if(!currentUser){
     navigate('/')
 }
 
-    },[currentUser, navigate])
+    },[navigate])
 
     if(loading){
         return <Spinner/>
@@ -32,15 +33,15 @@ if(!currentUser){
 
 
   return (<>
-    <div style={{position:'relative',right:'-25%'}} className="container">
+    <div className="container">
     <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-6">
-            <div className="well well-sm">
+          
                 <div className="row">
                     <div className="col-sm-6 col-md-4">
-                        <img  style={{ objectFit:'contain' ,backgroundColor:'white',width:'50px', height:'50px',borderRadius:'50%'}} src={logo} alt="profile" className="img-rounded img-responsive" />
+                        <img  style={{ objectFit:'contain' ,display:'block', maxWidth:'100%', height:'auto'}} src={currentUser.image} alt="profile" className="img-circle img-responsive" />
                     </div>
-                    <div className="col-sm-6 col-md-8">
+                    <div  style={{marginTop:'50px'}} className="col-sm-6 col-md-8">
                         <h4>  <i style={{marginRight:'10px'}} className="glyphicon glyphicon-user"></i>
                            {userData?.name}</h4>
                       
@@ -52,7 +53,7 @@ if(!currentUser){
                     
                     </div>
                 </div>
-            </div>
+          
         </div>
         </div>
         </div>

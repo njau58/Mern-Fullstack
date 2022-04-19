@@ -15,6 +15,7 @@ const path = require('path')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
+//app.use(express.json({limit: "30mb",extended:true}));
 app.use(cors());
 
 

@@ -53,9 +53,9 @@ const onLogout = () => {
 
              {auth?
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p style={{}}>Welcome,<p style={{fontWeight:'bold',fontSize:'0.8rem',marginRight:'20px',marginTop:'2px'}}>{JSON.parse(localStorage.getItem('currentUser')).name}</p></p>
+              <p style={{}}>Welcome,<p style={{fontWeight:'bold',fontSize:'0.8rem',marginRight:'40px',marginTop:'2px'}}>{JSON.parse(localStorage.getItem('currentUser')).name}</p></p>
 
-             <button onClick={onLogout} style={{border:'none', background:'white'}}>
+             <button onClick={onLogout} style={{border:'none', background:'white',marginRight:'22px',marginBottom:'15px'}}>
               <p>
                 Logout
                 <span

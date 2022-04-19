@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 //@ access public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,img } = req.body;
   //ensure all fields are not empty
   if (!name || !email || !password) {
     //no content
@@ -25,26 +25,36 @@ const registerUser = asyncHandler(async (req, res) => {
   //Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-
-  //Register user
-  const user = await userModel.create({
-    name,
-    email,
-    password: hashedPassword,
-  });
-
-  if (user) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
+  try{  //Register user
+    const user = await userModel.create({
+      name,
+      email,
+      img,
+      password: hashedPassword,
     });
-  } else {
-    res.status(422);
-    //unprocessable entity
-    throw new Error("Invalid user data");
+  
+    if (user) {
+      res.status(201).json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        image:user.img,
+        token: generateToken(user._id),
+      });
+    } }
+  catch(error){
+    if(error instanceof PayloadTooLargeError){
+      //res.status(<your status code>).send(<your response>);
+      res.status(400).send("Customized Response");
+      console.log('too big')
   }
+  }
+
+// else {
+//     res.status(422);
+//     //unprocessable entity
+//     throw new Error("Invalid user data");
+//   }
 });
 
 //@desc Login user
@@ -66,6 +76,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      image:user.img,
       token: generateToken(user._id),
     });
   } else {

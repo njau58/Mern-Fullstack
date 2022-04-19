@@ -14,8 +14,8 @@ const createProfile = asyncHandler(async (req, res) => {
   }
 
   //Save profile
-
   try {
+
     const profile = await company_model.create({
       companyName,
       phone,
@@ -23,26 +23,32 @@ const createProfile = asyncHandler(async (req, res) => {
       link,
       description,
       location,
+      author:req.user.name,
       user: req.user.id,
-      author: req.user.name,
+ 
     });
 
-    res.status(201).json({
-      companyName,
-      phone,
-      email,
-      link,
-      description,
-      location,
-      author,
-      _id: profile.id,
-    });
+ if(profile){
+  res.status(201).json({
+    companyName,
+    phone,
+    email,
+    link,
+    description,
+    location,
+    author: req.user.name,
+    _id: profile.id,
+  });
+ }
+ 
+  
   } catch (error) {
-    if (error.code === 1100) {
+
+   
       res.status(409);
 
       throw new Error("Profile already exist.");
-    }
+    
   }
 });
 

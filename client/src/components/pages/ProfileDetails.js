@@ -41,10 +41,9 @@ const ProfileDetails = (props) => {
       }
       getProfileById();
     },
-    [_id,config,navigate]
+    [_id,config]
   );
-
-  async function handleDelete() {
+ function handleDelete() {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -59,7 +58,7 @@ const ProfileDetails = (props) => {
           .delete(`/api/delete-profile/${_id}`,config)
           .then((result) => {
             Swal.fire("Deleted!", `Document has been deleted.`, "success");
-            navigate("/view-profiles");
+            navigate('/');
           })
           .catch((error) =>{
             let errorMessage
@@ -67,7 +66,7 @@ const ProfileDetails = (props) => {
             if(error.response.status===401){
               
               errorMessage = 'Not Authorized.You can only update a profile you created.'
-              navigate(`/view-single-profile/${profile._id}`,config)
+              navigate('/view-profiles')
             }
 
             toast.error(errorMessage)

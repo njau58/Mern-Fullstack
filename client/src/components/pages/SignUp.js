@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate,} from 'react-router-dom'
 import {toast } from 'react-toastify';
 import { registerInitiate } from "../../Redux/auth/authActions";
+import FileBase64 from 'react-file-base64';
 
 
 
@@ -13,7 +14,8 @@ const SignUp = () => {
   const initialState = {
     name:'',
     email:'',
-    password:''
+    password:'',
+    img:''
   }
   const [user, setUser] = useState(initialState)
   const [passwordShown, setPasswordShown] = useState(false);
@@ -38,6 +40,9 @@ if(error){
   }
   if(error.response.status===204){
    errorMessage='Please fill all fields.'
+  }
+  if(error.response.status===413){
+   errorMessage='The file is too big.Choose files below 1MB'
   }
 
   toast.error(errorMessage)
@@ -172,9 +177,20 @@ const handleOnChange = (event) =>{
                 )}
               </span>
             </div>
+            <div style={{margin:'10px'}} className="form-group">
+              <label >Upload profile image(optional)</label>
+              <FileBase64
+type="file"
+multiple={false}
+onDone={({ base64 }) => setUser({ ...user, img: base64 })}
+
+/>
+            </div>
+
           </div>
 
           <div style={{ width:"100%", display: "flex", justifyContent: "center" }}>
+
             <input  style={{width:"90%",marginBottom:'20px'}}  type="submit" value="SignUp" className="btn btn-primary" />
           </div>
 

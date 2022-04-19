@@ -4,7 +4,7 @@ import{post } from "axios";
 import Swal from "sweetalert2";
 import {toast} from 'react-toastify'
 
-function Create(props) {
+function Create() {
   const initialState = {
     companyName: "",
     phone: "",
@@ -47,6 +47,7 @@ function Create(props) {
     
     
     .catch(error => {
+      console.log(error)
       let errorMessage
       if(error.response.status ===409){
         errorMessage = 'Profile already exist.'

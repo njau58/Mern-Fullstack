@@ -25,6 +25,7 @@ const SignUp = () => {
    const dispatch = useDispatch();
    const token  = useSelector((state) => state.user.token);
    const error  = useSelector((state) => state.user.error);
+   const loading  = useSelector((state) => state.user.loading);
   
   
 
@@ -42,7 +43,7 @@ if(error){
    errorMessage='Please fill all fields.'
   }
   if(error.response.status===413){
-   errorMessage='The file is too big.Choose files below 1MB'
+   errorMessage='The file is too big.Choose files below 60KB'
   }
 
   toast.error(errorMessage)
@@ -191,7 +192,7 @@ onDone={({ base64 }) => setUser({ ...user, img: base64 })}
 
           <div style={{ width:"100%", display: "flex", justifyContent: "center" }}>
 
-            <input  style={{width:"90%",marginBottom:'20px'}}  type="submit" value="SignUp" className="btn btn-primary" />
+            <input   style={{width:"90%",marginBottom:'20px',outline:'none'}}  type="submit" value={loading?"Loading...":"SignUP"}  className={`btn + ${loading?'disabled' :null} + btn-primary`} />
           </div>
 
         </form>

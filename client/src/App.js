@@ -21,6 +21,7 @@ import SignUp from "./components/pages/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/pages/Login";
 import NotFound from "./components/pages/404";
+import Navbar from "./components/pages/Navbar";
 
 
 
@@ -39,6 +40,7 @@ function App() {
     <>
     <Router>
     <Dashboard/>
+    {token&&<Navbar/>}
 
       <Routes>
         <Route exact path="/" element={token?<HomePage />:<Login/>} />

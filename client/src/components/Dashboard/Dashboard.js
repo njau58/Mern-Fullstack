@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React from "react";
 import "./Dashboard.css";
 import logo from "../../assets/images/logo.png";
 import { NavLink,useNavigate } from "react-router-dom";
@@ -39,21 +39,13 @@ const onLogout = () => {
             <img src={logo} alt="logo"></img>
           </NavLink>
         </div>
-        <div className="center">
-        {auth?   <div style={{ display: "flex", justifyContent: "space-between" }}>
-
-       
-<NavLink to='/view-profiles'><p style={{marginRight:'10px'}}><small>Profiles</small></p></NavLink>
-<NavLink to='/my-account'><p style={{marginRight:'10px'}}><small>Account</small></p></NavLink></div>:null}
-     
-
-        </div>
+  
         <div className="right">
         
 
              {auth?
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <p style={{}}>Welcome,<p style={{fontWeight:'bold',fontSize:'0.8rem',marginRight:'40px',marginTop:'2px'}}>{JSON.parse(localStorage.getItem('currentUser')).name}</p></p>
+              <p style={{dispaly:'flex',marginRight:'20px'}}>Welcome,<p style={{fontWeight:'bold',fontSize:'10px',marginRight:'40px',marginTop:'2px',marginBottom:'5px'}}>{JSON.parse(localStorage.getItem('currentUser')).name}</p></p>
 
              <button onClick={onLogout} style={{border:'none', background:'white',marginRight:'22px',marginBottom:'15px'}}>
               <p>

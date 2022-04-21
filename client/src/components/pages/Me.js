@@ -7,6 +7,7 @@ import logo from '../../assets/images/logo.png'
 
 
 
+
 const Me = () => {
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -14,11 +15,13 @@ const Me = () => {
 
 
     const [userData, setData] = useState({})
+   
     
     const navigate = useNavigate()
     useEffect(()=>{
 setData(currentUser)
 console.log(currentUser)
+
 
 
 if(!currentUser){
@@ -33,15 +36,15 @@ if(!currentUser){
 
 
   return (<>
-    <div className="container">
+    <div  style={{marginTop:'-50px'}}  className="container">
     <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-6">
           
                 <div className="row">
                     <div className="col-sm-6 col-md-4">
-                        <img  style={{ objectFit:'contain' ,display:'block', maxWidth:'100%', height:'auto'}} src={currentUser.image} alt="profile" className="img-circle img-responsive" />
+                        <img  style={{ marginTop:'5px',objectFit:'contain' ,display:'flex', width:'50%'}} src={currentUser.image?currentUser.image:logo} alt="profile" className="img-circle img-responsive" />
                     </div>
-                    <div  style={{marginTop:'50px'}} className="col-sm-6 col-md-8">
+                    <div  style={{marginTop:'5px',marginRight:'100px'}} className="col-sm-6 col-md-8">
                         <h4>  <i style={{marginRight:'10px'}} className="glyphicon glyphicon-user"></i>
                            {userData?.name}</h4>
                       

@@ -17,6 +17,7 @@ const Login = () => {
       const [passwordShown, setPasswordShown] = useState(false);
       const token  = useSelector((state) => state.user.token);
       const error  = useSelector((state) => state.user.error);
+      const loading = useSelector((state) => state.user.loading);
       
    
       const navigate = useNavigate()
@@ -147,9 +148,9 @@ const Login = () => {
               </div> <NavLink to=''> <p style={{ fontSize:'1.3rem', marginTop:'0px', display:'flex',justifyContent:'flex-end',textAlign:'center'}}>Forgot password?</p></NavLink>
          
               <div style={{ width:"100%", display: "flex", justifyContent: "center" }}>
-                <input  style={{width:"90%", }}  type="submit" value="Login" className="btn btn-primary" />
+                <input  style={{width:"90%",outline:'none' }}  type="submit" value={loading?"Loading...":"Login"}  className={`btn + ${loading?'disabled' :null} + btn-primary`} />
               </div>
-             <p style={{ fontSize:'1.3rem', marginTop:'10px', display:'flex',justifyContent:'flex-start',textAlign:'center'}}  ><input checked style={{marginRight:'5px'}} type='checkbox'></input><p>Keep me logged in</p></p> 
+             <p style={{ fontSize:'1.3rem', marginTop:'10px', display:'flex',justifyContent:'flex-start',textAlign:'center'}}  ><input style={{marginRight:'5px'}} type='checkbox'></input><p>Keep me logged in</p></p> 
           <p style={{ fontSize:'1.3rem', marginTop:'0', display:'flex',justifyContent:'center',textAlign:'center'}}><p>Don't have an account?</p>  
             <NavLink to='/register'> <p >Join Crud</p></NavLink>
             </p> 

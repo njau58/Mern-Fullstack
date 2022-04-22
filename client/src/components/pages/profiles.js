@@ -92,9 +92,8 @@ const Profiles = () => {
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Location</th>
-                  <th>View</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Action</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -120,30 +119,11 @@ const Profiles = () => {
                           style={{ padding: "5px", width: "100px" }}
                         >
                           <span class="glyphicon glyphicon-search"></span>
-                          View
+                         Action
                         </Link>
                       </td>
-                      <td>
-                        <Link
-                          class="glyphicon glyphicon-search"
-                          to={`/view-single-profile/${profile._id}`}
-                          className="btn btn-primary"
-                          style={{ padding: "5px", width: "100px" }}
-                        >
-                          <span class="glyphicon glyphicon-edit"></span>
-                          Edit
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to={`/view-single-profile/${profile._id}`}
-                          className="btn btn-danger"
-                          style={{ padding: "5px", width: "100px" }}
-                        >
-                          <span class="glyphicon glyphicon-remove"></span>
-                          Delete
-                        </Link>
-                      </td>
+                 
+                  
                     </tr>
                   );
                 })}

@@ -47,7 +47,7 @@ function EditProfileDetails(props) {
           navigate('/view-profiles')
         });
     },
-    [_id,navigate,config]
+    [_id,navigate]
   );
 
   function handleSubmit(event) {
@@ -91,8 +91,8 @@ function EditProfileDetails(props) {
     });
   }
 
-  function handleChange(event) {
-    setProfile({ ...profile, [event.target.name]: event.target.value });
+const handleChange=(event)=> {
+  setProfile({ ...profile, [event.target.name]: event.target.value });
   }
 
   function handleCancel() {

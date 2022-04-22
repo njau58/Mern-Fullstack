@@ -7,7 +7,7 @@ const HomePage = () => {
 		<div  style={{marginTop:'-50px'}}  className="container">
 			<h1>MERN Stack CRUD</h1>
 			<p>
-				<b>Front-end</b>: React.js v17+ with Bootstrap3&styled-components.
+				<b>Front-end</b>: React.js v17+ with Bootstrap3.
 			</p>
 			<p>
 				<b>Back-end</b>: Node.js, Express.js

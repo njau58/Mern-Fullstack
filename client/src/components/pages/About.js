@@ -1,7 +1,7 @@
 import React from 'react'
 
 const About = () => {
-    const link = "https://developer.softlab.co.ke";
+    const link = "https://github.com/njau58/Mern-Fullstack";
 	const target = "_blank";
     return (
 		<div  style={{marginTop:'50px'}}  className="container">

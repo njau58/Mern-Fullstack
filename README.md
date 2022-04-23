@@ -1,5 +1,5 @@
 # Mern-Fullstack
-Fullstack application in the MERN stack. With authorization and authentication.
+Fullstack application in the MERN stack. With authorization, authentication pagination and more.
 
 #Demo 
 

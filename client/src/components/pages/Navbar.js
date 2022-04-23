@@ -9,7 +9,10 @@ const Navbar = () => {
 
        
 <NavLink to='/view-profiles'><p><small>Profiles</small></p></NavLink>
-<NavLink to='/my-account'><p style={{marginLeft:'10px'}}><small>Account</small></p></NavLink></div>
+<NavLink to='/my-account'><p style={{marginLeft:'5px'}}><small>Account</small></p></NavLink>
+<NavLink to='/about'><p style={{marginLeft:'5px'}}><small>About</small></p></NavLink>
+
+</div>
 
      
 

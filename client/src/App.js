@@ -22,6 +22,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/pages/Login";
 import NotFound from "./components/pages/404";
 import Navbar from "./components/pages/Navbar";
+import About from "./components/pages/About";
 
 
 
@@ -56,6 +57,7 @@ function App() {
           element={<EditProfileDetails />}
         />
         <Route exact path="/view-profiles" element={<Profiles />} />
+        <Route exact path="/about" element={<About />} />
         <Route exact path="/register" element={<SignUp />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/my-account" element={<Me />} />

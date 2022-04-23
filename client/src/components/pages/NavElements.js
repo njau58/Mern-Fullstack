@@ -7,7 +7,7 @@ export const NavLink = styled(LinkR)`
 text-decoration:none;
 display: flex;
 align-items: center;
-padding:0 10px;
+padding:0 5px;
 height:100%;
 cursor:pointer;
 

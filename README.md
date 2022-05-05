@@ -1,6 +1,6 @@
 # Mern-Fullstack
-Fullstack application in the MERN stack. With authorization, authentication pagination and more.
+Fullstack application in the MERN stack. With authorization and authentication,pagination search feature optimized for both client and server etc..
 
 #Demo 
 
-[Heres the DEMO](https://mernnjau.herokuapp.com/)
+[DEMO](https://mernnjau.herokuapp.com/)

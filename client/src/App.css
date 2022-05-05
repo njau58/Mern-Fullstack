@@ -5,3 +5,7 @@
     padding:0;
     margin: 0;
 }
+.App{   
+    background: linear-gradient(to bottom, #ee0654 88%, #ff3300 100%);
+
+}

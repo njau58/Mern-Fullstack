@@ -23,6 +23,7 @@ import Login from "./components/pages/Login";
 import NotFound from "./components/pages/404";
 import Navbar from "./components/pages/Navbar";
 import About from "./components/pages/About";
+import './App.css'
 
 
 
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <>
+    <div className="App" style={{height:'10px', width:'100%'}}></div>
     <Router>
     <Dashboard/>
     {token&&<Navbar/>}

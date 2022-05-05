@@ -9,6 +9,7 @@ const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState('');
   const dispatch = useDispatch();
 
   // const profiles = useSelector(state=>state.profile.profiles)
@@ -24,7 +25,7 @@ const Profiles = () => {
     let getProfiles = async () => {
       try {
         let res = await fetch(
-          `/api/get-all-profiles?page=1&limit=${limit}`,
+          `/api/get-all-profiles?page=1&limit=${limit}&q=${query}`,
           config
         );
         const data = await res.json();
@@ -36,15 +37,17 @@ const Profiles = () => {
         console.log(error);
         setLoading(false);
       }
+
+      console.log(query)
     };
 
     getProfiles();
 
     // dispatch(getAllProfilesInitiate(limit))
-  }, [dispatch, limit]);
+  }, [dispatch, limit, query]);
   const fetchProfiles = async (currentPage) => {
     const res = await fetch(
-      `/api/get-all-profiles?page=${currentPage}&limit=${limit}`,
+      `/api/get-all-profiles?page=${currentPage}&limit=${limit}&q=${query}`,
       config
     );
     const data = await res.json();
@@ -75,7 +78,10 @@ const Profiles = () => {
                 Create Profile
               </Link>
             </p>
+
           </h2>
+          <input onChange={e=>setQuery(e.target.value)}type="text" className="form-control" style={{ width:'400px',display:'flex',margin:'0 auto'}} placeholder="search..."/>
+
           <div style={{ alignItems: "center" }}>
             <div class="form-group"></div>
           </div>

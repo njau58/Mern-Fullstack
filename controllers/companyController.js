@@ -90,9 +90,16 @@ const editProfile = asyncHandler(async (req, res) => {
 //@route GET  api/get-all-profiles
 //@Access private
 const getAllProfiles = asyncHandler(async (req, res) => {
+
+  let q = req.query.q 
+
+  if(q==undefined){
+q=''
+  }
   var page = parseInt(req.query.page);
   var limit = parseInt(req.query.limit);
   var query = {};
+
   if (page < 0 || page === 0) {
     res.status(400);
     throw new Error("invalid page number, should start with 1");
@@ -105,10 +112,19 @@ const getAllProfiles = asyncHandler(async (req, res) => {
     throw new Error("Error fetching data.");
   }
 
-  const data = await company_model.find({}, {}, query);
+
+
+  const data = await company_model.find({
+    "$or":[
+      {author:{$regex:q,'$options' : 'i'}},
+      {email:{$regex:q,'$options' : 'i'}},
+      {companyName:{$regex:q,'$options' : 'i'}}
+    ]
+  }, {}, query);
   if (!data) {
     throw new Error("Error fetching data.");
   }
+  console.log(data)
 
   res.set("x-total-count", totalCount);
   res.json(data);

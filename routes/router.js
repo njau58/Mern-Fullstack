@@ -14,6 +14,10 @@ router.post('/register',userController.registerUser)
 router.post('/login',userController.loginUser)
 router.post('/me',protect,userController.getMe)
 
+router.all('/forgot-password',userController.forgotPassword )
+router.all('/reset-password/:id/:token',userController.resetPassword )
+
+
 
 
 module.exports=router

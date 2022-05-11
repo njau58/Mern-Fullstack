@@ -2,6 +2,8 @@ const userModel = require("../models/users");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const { render } = require("express/lib/response");
+const nodemailer = require('nodemailer')
 
 // @desc Register new user
 // @route api/register
@@ -106,8 +108,183 @@ const generateToken = (id) => {
   });
 };
 
+
+//@desc Forgot password
+//@route api/forgot-password
+//@access public
+
+const forgotPassword = async (req,res) =>{
+
+//get
+ if(req.method==='GET'){
+
+  res.render('forgot-password',{email:'email', error:'error'})
+
+ }
+
+
+//post
+
+if(req.method==='POST'){
+
+const {email} = req.body
+
+//check if email exist
+const user = await userModel.findOne({ email });
+
+if(!user){
+ return res.render('not-found')
+
+}
+ else{
+
+  const secret = process.env.JWT_SECRET + user.password
+  const payload = {
+      email:user.email,
+      id:user.id
+  }
+
+  
+  const token = jwt.sign(payload, secret, {expiresIn:'10m'})
+const link =`http://localhost:${process.env.PORT}/api/reset-password/${user.id}/${token}`
+
+
+var transporter = nodemailer.createTransport({
+  host: 'lon105.truehost.cloud',
+  port: 465,
+  auth: {
+      user: 'developer@softlab.co.ke',
+      pass: 'dev@soflab.2021'
+  }
+
+});
+
+var mailOptions = {
+  from: 'developer@softlab.co.ke',
+  to: `${email}`,
+  subject: 'Reset password instructions',
+  text: `
+
+  Someone (hopefully you) has requested a password reset for your Heroku account. Follow the link below to set a new password:
+
+${link}
+  
+  If you don't wish to reset your password, disregard this email and no action will be taken.
+
+  Kind regards
+  Softlab
+  
+  `
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+   res.render('confirmation')
+  }
+});
+
+
+
+
+
+
+
+
+ }
+
+
+}
+
+}
+
+
+const resetPassword = async (req, res) =>{
+
+ if(req.method==='GET'){
+  const {id, token} = req.params
+ //check validity and existence of id
+    const user = await userModel.findOne({ id });
+if(id!==user.id){
+   res.send('Invalid id')
+return
+}
+    const secret = process.env.JWT_SECRET + user.password
+
+    try{
+
+        const payload = jwt.verify(token, secret)
+
+        res.render('reset-password', {email:user.email,error:null})
+
+
+
+    }catch(error){
+
+        res.send(error)
+    }
+
+ }
+
+ if(req.method==='POST'){
+
+  const {id, token} = req.params
+
+  const{password, confirmPassword} = req.body
+
+
+ //check validity and existence of id
+ const user = await userModel.findOne({ id });
+ console.log(user)
+ if(id!==user.id){
+    res.send('Invalid id')
+ return
+ }
+  const secret = process.env.JWT_SECRET + user.password
+
+  try{
+
+      const payload = jwt.verify(token, secret)
+
+      //check if password match
+      //ensure to hash
+
+      if(password!==confirmPassword){
+     res.render('resetPassword', { email:user.email, error:'password do not match.'})
+   return
+
+      }
+       //Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+
+  const updated = await userModel.findByIdAndUpdate({ _id: id },{password:hashedPassword})
+
+      res.render('confirmation-reset')
+
+    
+
+
+  }catch(error){
+
+      res.send(error.message)
+  }
+
+
+ }
+
+
+
+}
+
+
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
+  forgotPassword,
+  resetPassword
 };

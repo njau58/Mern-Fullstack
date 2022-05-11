@@ -94,6 +94,11 @@ const Login = () => {
     
       }
 
+      const forgotPassword = () =>{
+
+        window.open('http://localhost:5000/api/forgot-password');
+      }
+
  
     
       return (<>
@@ -145,8 +150,8 @@ const Login = () => {
                     )}
                   </span>
                 </div>
-              </div> <NavLink to=''> <p style={{ fontSize:'1.3rem', marginTop:'0px', display:'flex',justifyContent:'flex-end',textAlign:'center'}}>Forgot password?</p></NavLink>
-         
+              </div>  
+              <p  onClick={forgotPassword} style={{ cursor:'pointer', fontSize:'1.3rem', marginTop:'0px', display:'flex',justifyContent:'flex-end',textAlign:'center'}}>Forgot password?</p>
               <div style={{ width:"100%", display: "flex", justifyContent: "center" }}>
                 <input  style={{width:"90%",outline:'none' }}  type="submit" value={loading?"Loading...":"Login"}  className={`btn + ${loading?'disabled' :null} + btn-primary`} />
               </div>
@@ -157,6 +162,7 @@ const Login = () => {
             
             
             </form>
+          
           </div>
       
     

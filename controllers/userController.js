@@ -146,7 +146,7 @@ if(!user){
 
   
   const token = jwt.sign(payload, secret, {expiresIn:'10m'})
-const link =`https://mernnjau.herokuapp.com/${process.env.PORT}/api/reset-password/${user.id}/${token}`
+const link =`https://mernnjau.herokuapp.com/api/reset-password/${user.id}/${token}`
 
 
 var transporter = nodemailer.createTransport({

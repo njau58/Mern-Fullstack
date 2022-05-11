@@ -158,11 +158,11 @@ var transporter = nodemailer.createTransport({
   }
 
 });
-
+let  from=` Softlab Team <developer@softlab.co.ke>`
 var mailOptions = {
-  from: 'developer@softlab.co.ke',
+  from:from,
   to: `${email}`,
-  subject: 'Reset password instructions',
+  subject: 'Reset your password ',
   text: `
 
   Someone (hopefully you) has requested a password reset for your Heroku account. Follow the link below to set a new password:

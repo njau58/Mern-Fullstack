@@ -96,7 +96,7 @@ const Login = () => {
 
       const forgotPassword = () =>{
 
-        window.open('http://localhost:5000/api/forgot-password');
+        window.open('https://mernnjau.herokuapp.com/api/forgot-password');
       }
 
  

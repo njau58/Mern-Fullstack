@@ -164,6 +164,7 @@ var mailOptions = {
   to: `${email}`,
   subject: 'Reset your password ',
   text: `
+  Hi ${user.name}, 
 
   Someone (hopefully you) has requested a password reset for your Heroku account. Follow the link below to set a new password:
 

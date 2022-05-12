@@ -212,7 +212,7 @@ const resetPassword = async (req, res) => {
     }
 
     if (password !== confirmPassword) {
-      res.render("resetPassword", {
+      res.render("reset-password", {
         email: user.email,
         error: "password do not match.",
       });

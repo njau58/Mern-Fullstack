@@ -118,7 +118,8 @@ q=''
     "$or":[
       {author:{$regex:q,'$options' : 'i'}},
       {email:{$regex:q,'$options' : 'i'}},
-      {companyName:{$regex:q,'$options' : 'i'}}
+      {companyName:{$regex:q,'$options' : 'i'}},
+      {description:{$regex:q,'$options' : 'i'}}
     ]
   }, {}, query);
   if (!data) {

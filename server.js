@@ -23,7 +23,6 @@ app.use(cors());
 //routes
 app.use('/api', routes)
 
-
 //connection to database
 mongoose.connect(dbURI)
 .then(result=>{

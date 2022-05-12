@@ -3,14 +3,14 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const { render } = require("express/lib/response");
-const nodemailer = require('nodemailer')
+const nodemailer = require("nodemailer");
 
 // @desc Register new user
 // @route api/register
 //@ access public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password,img } = req.body;
+  const { name, email, password, img } = req.body;
   //ensure all fields are not empty
   if (!name || !email || !password) {
     //no content
@@ -27,36 +27,37 @@ const registerUser = asyncHandler(async (req, res) => {
   //Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  try{  //Register user
+  try {
+    //Register user
     const user = await userModel.create({
       name,
       email,
       img,
       password: hashedPassword,
     });
-  
+
     if (user) {
       res.status(201).json({
         _id: user.id,
         name: user.name,
         email: user.email,
-        image:user.img,
+        image: user.img,
         token: generateToken(user._id),
       });
-    } }
-  catch(error){
-    if(error instanceof PayloadTooLargeError){
+    }
+  } catch (error) {
+    if (error instanceof PayloadTooLargeError) {
       //res.status(<your status code>).send(<your response>);
       res.status(400).send("Customized Response");
-      console.log('too big')
-  }
+      console.log("too big");
+    }
   }
 
-// else {
-//     res.status(422);
-//     //unprocessable entity
-//     throw new Error("Invalid user data");
-//   }
+  // else {
+  //     res.status(422);
+  //     //unprocessable entity
+  //     throw new Error("Invalid user data");
+  //   }
 });
 
 //@desc Login user
@@ -78,7 +79,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      image:user.img,
+      image: user.img,
       token: generateToken(user._id),
     });
   } else {
@@ -108,184 +109,142 @@ const generateToken = (id) => {
   });
 };
 
-
 //@desc Forgot password
 //@route api/forgot-password
 //@access public
 
-const forgotPassword = async (req,res) =>{
-
-//get
- if(req.method==='GET'){
-
-  res.render('forgot-password',{email:'email', error:'error'})
-
- }
-
-
-//post
-
-if(req.method==='POST'){
-
-const {email} = req.body
-
-//check if email exist
-const user = await userModel.findOne({ email });
-
-if(!user){
- return res.render('not-found')
-
-}
- else{
-
-  const secret = process.env.JWT_SECRET + user.password
-  const payload = {
-      email:user.email,
-      id:user.id
+const forgotPassword = async (req, res) => {
+  //get
+  if (req.method === "GET") {
+    res.render("forgot-password", { email: "email", error: "error" });
   }
 
-  
-  const token = jwt.sign(payload, secret, {expiresIn:'10m'})
-const link =`https://mernnjau.herokuapp.com/api/reset-password/${user.id}/${token}`
+  //post
 
+  if (req.method === "POST") {
+    const { email } = req.body;
 
-var transporter = nodemailer.createTransport({
-  host: 'lon105.truehost.cloud',
-  port: 465,
-  auth: {
-      user: 'developer@softlab.co.ke',
-      pass: 'dev@soflab.2021'
-  }
+    //check if email exist
+    const user = await userModel.findOne({ email });
 
-});
-let  from=` Softlab Team <developer@softlab.co.ke>`
-var mailOptions = {
-  from:from,
-  to: `${email}`,
-  subject: 'Reset your password ',
-  text: `
+    if (!user) {
+      return res.render("not-found");
+    } else {
+      const secret = process.env.JWT_SECRET + user.password;
+      const payload = {
+        email: user.email,
+        id: user.id,
+      };
+
+      const token = jwt.sign(payload, secret, { expiresIn: "10m" });
+      const link = `https://mernnjau.herokuapp.com/api/reset-password/${user.id}/${token}`;
+
+      var transporter = nodemailer.createTransport({
+        host: "lon105.truehost.cloud",
+        port: 465,
+        auth: {
+          user: "developer@softlab.co.ke",
+          pass: process.env.MAILER_PASS
+        },
+      });
+      let from = ` Softlab Team <developer@softlab.co.ke>`;
+      var mailOptions = {
+        from: from,
+        to: `${email}`,
+        subject: "Reset your password ",
+        text: `
   Hi ${user.name}, 
 
-  Someone (hopefully you) has requested a password reset for your Heroku account. Follow the link below to set a new password:
+  Someone (hopefully you) has requested a password reset for your Softlab Crud account. Follow the link below to set a new password:
 
 ${link}
   
   If you don't wish to reset your password, disregard this email and no action will be taken.
 
   Kind regards
-  Softlab
+  Softlab Team
   
-  `
+  `,
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          res.render("confirmation");
+        }
+      });
+    }
+  }
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-   res.render('confirmation')
-  }
-});
-
-
-
-
-
-
-
-
- }
-
-
-}
-
-}
-
-
-const resetPassword = async (req, res) =>{
-
- if(req.method==='GET'){
-  const {id, token} = req.params
- //check validity and existence of id
+const resetPassword = async (req, res) => {
+  if (req.method === "GET") {
+    const { id, token } = req.params;
+    //check validity and existence of id
     const user = await userModel.findOne({ id });
-if(id!==user.id){
-   res.send('Invalid id')
-return
-}
-    const secret = process.env.JWT_SECRET + user.password
-
-    try{
-
-        const payload = jwt.verify(token, secret)
-
-        res.render('reset-password', {email:user.email,error:null})
-
-
-
-    }catch(error){
-
-        res.send(error)
+    if (id !== user.id) {
+      res.send("Invalid id");
+      return;
     }
+    const secret = process.env.JWT_SECRET + user.password;
 
- }
+    try {
+      const payload = jwt.verify(token, secret);
 
- if(req.method==='POST'){
+      res.render("reset-password", { email: user.email, error: null });
+    } catch (error) {
+      res.send(error);
+    }
+  }
 
-  const {id, token} = req.params
+  if (req.method === "POST") {
+    const { id, token } = req.params;
 
-  const{password, confirmPassword} = req.body
+    const { password, confirmPassword } = req.body;
 
+    //check validity and existence of id
+    const user = await userModel.findOne({ id });
+    console.log(user);
+    if (id !== user.id) {
+      res.send("Invalid id");
+      return;
+    }
+    const secret = process.env.JWT_SECRET + user.password;
 
- //check validity and existence of id
- const user = await userModel.findOne({ id });
- console.log(user)
- if(id!==user.id){
-    res.send('Invalid id')
- return
- }
-  const secret = process.env.JWT_SECRET + user.password
-
-  try{
-
-      const payload = jwt.verify(token, secret)
+    try {
+      const payload = jwt.verify(token, secret);
 
       //check if password match
       //ensure to hash
 
-      if(password!==confirmPassword){
-     res.render('resetPassword', { email:user.email, error:'password do not match.'})
-   return
-
+      if (password !== confirmPassword) {
+        res.render("resetPassword", {
+          email: user.email,
+          error: "password do not match.",
+        });
+       
       }
-       //Hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+      //Hash password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
+      const updated = await userModel.findByIdAndUpdate(
+        { _id: id },
+        { password: hashedPassword }
+      );
 
-  const updated = await userModel.findByIdAndUpdate({ _id: id },{password:hashedPassword})
-
-      res.render('confirmation-reset')
-
-    
-
-
-  }catch(error){
-
-      res.send(error.message)
+      res.render("confirmation-reset");
+    } catch (error) {
+      res.send(error.message);
+    }
   }
-
-
- }
-
-
-
-}
-
-
+};
 
 module.exports = {
   registerUser,
   loginUser,
   getMe,
   forgotPassword,
-  resetPassword
+  resetPassword,
 };

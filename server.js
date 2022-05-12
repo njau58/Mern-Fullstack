@@ -23,6 +23,11 @@ app.use(cors());
 //routes
 app.use('/api', routes)
 
+app.get('/test', (req, res)=>{
+  res.render('reset-password',{email:'email',error:'password do not match'})
+})
+
+
 //connection to database
 mongoose.connect(dbURI)
 .then(result=>{

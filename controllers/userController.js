@@ -210,6 +210,15 @@ const resetPassword = async (req, res) => {
       res.send("Invalid id");
       return;
     }
+
+    if (password !== confirmPassword) {
+      res.render("resetPassword", {
+        email: user.email,
+        error: "password do not match.",
+      });
+      return
+     
+    }
     const secret = process.env.JWT_SECRET + user.password;
 
     try {
@@ -218,13 +227,7 @@ const resetPassword = async (req, res) => {
       //check if password match
       //ensure to hash
 
-      if (password !== confirmPassword) {
-        res.render("resetPassword", {
-          email: user.email,
-          error: "password do not match.",
-        });
-       
-      }
+
       //Hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);

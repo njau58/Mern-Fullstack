@@ -81,7 +81,7 @@ const onLogout = () => {
         </div>
       </div>
       <hr
-        style={{ width: "80%", margin: "0 auto", paddingBottom: "50px" }}
+        style={{ width: "80%", margin: "0 auto",marginBottom:'150px' }}
       ></hr>
     </>
   );

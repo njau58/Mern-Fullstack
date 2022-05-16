@@ -1,14 +1,14 @@
 const company_model = require("../models/companyModel");
 const asyncHandler = require("express-async-handler");
-const ObjectId = require("mongodb").ObjectId;
+
 
 //@desc Register new company profile
 //@route api/create-company-profile
 //@Access private
 const createProfile = asyncHandler(async (req, res) => {
-  const { companyName, phone, email, link, description, location } = req.body;
+  const { companyName, phone, email, link, description, location,category } = req.body;
   //check all fields
-  if (!companyName || !phone || !email || !link || !description || !location) {
+  if (!companyName || !phone || !email || !link || !description || !location|| !category) {
     res.status(422);
     throw new Error("Please add all the fields.");
   }
@@ -23,6 +23,7 @@ const createProfile = asyncHandler(async (req, res) => {
       link,
       description,
       location,
+      category,
       author:req.user.name,
       user: req.user.id,
  
@@ -36,6 +37,7 @@ const createProfile = asyncHandler(async (req, res) => {
     link,
     description,
     location,
+    category,
     author: req.user.name,
     _id: profile.id,
   });
@@ -56,7 +58,7 @@ const createProfile = asyncHandler(async (req, res) => {
 //@route POST  api/edit-company-profile:id
 //@Access private
 const editProfile = asyncHandler(async (req, res) => {
-  const { email, phone, companyName } = req.body;
+  const { email, phone, companyName, category } = req.body;
 
   //check if profile is available
 
@@ -93,6 +95,9 @@ const getAllProfiles = asyncHandler(async (req, res) => {
 
   let q = req.query.q 
 
+
+
+
   if(q==undefined){
 q=''
   }
@@ -119,7 +124,9 @@ q=''
       {author:{$regex:q,'$options' : 'i'}},
       {email:{$regex:q,'$options' : 'i'}},
       {companyName:{$regex:q,'$options' : 'i'}},
-      {description:{$regex:q,'$options' : 'i'}}
+      {category:{$regex:q,'$options' : 'i'}},
+      {description:{$regex:q,'$options' : 'i'}},
+   
     ]
   }, {}, query);
   if (!data) {
@@ -130,6 +137,27 @@ q=''
   res.set("x-total-count", totalCount);
   res.json(data);
 });
+
+const getCategory = asyncHandler(async (req, res)=>{
+  let s = req.query.s 
+ 
+
+  if(s==='All'){
+    const category = await company_model.find({})
+    return res.send(category)
+  }
+  else{
+
+  const category = await company_model.find({category:s})
+  return res.send(category)
+
+}
+  
+
+
+
+
+})
 
 //@desc Delete profile by id
 //@route DELETE  api/delelte-profile:id
@@ -184,4 +212,5 @@ module.exports = {
   getAllProfiles,
   deleteProfile,
   viewSingle,
+  getCategory
 };

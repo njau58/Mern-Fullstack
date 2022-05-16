@@ -105,21 +105,25 @@ const Login = () => {
 
         <div
           className="container overflow-auto"
-          style={{marginTop:'-60px', maxWidth: "700px", OverflowY: "scroll" }}
+          style={{marginTop:'-130px', maxWidth: "400px", OverflowY: "scroll", }}
         >
-          <h3>Login</h3>
-          <hr />
+        
           <div
             className="formContainer"
             style={{
-              border: "solid 1px #eee",
+              border: "1px solid #ccc",
               borderRadius: "4px",
               padding: "18px",
-              boxShadow:' 0 0 30px #ccc',
+              boxShadow:'  0 2px 2px 0 #ccc',
               zIndex:'5000'
             }}
           >
             <form onSubmit={handleSubmit} >
+            <h2 style={
+              {
+                marginBottom:'20px'
+              }
+            }>Login</h2>
         
               <div className="form-group">
                 <label>Email</label>
@@ -142,7 +146,7 @@ const Login = () => {
                     onChange={handleOnChange}
                     className="form-control"
                   />
-                  <span onClick={togglePassword} className="input-group-addon">
+                  <span style={{displsay:'flex', paddingRight:'20px'}} onClick={togglePassword} className="input-group-addon">
                     {passwordShown ? (
                       <i className="glyphicon glyphicon-eye-open"></i>
                     ) : (

@@ -9,6 +9,7 @@ router.post('/edit-company-profile/:id',protect,companyControllers.editProfile)
 router.get('/get-all-profiles',protect, companyControllers.getAllProfiles)
 router.delete('/delete-profile/:id',protect, companyControllers.deleteProfile)
 router.get('/view-single-profile/:id',protect,companyControllers.viewSingle)
+router.get('/get-category',protect,companyControllers.getCategory)
 
 router.post('/register',userController.registerUser)
 router.post('/login',userController.loginUser)

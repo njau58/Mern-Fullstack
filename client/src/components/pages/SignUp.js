@@ -105,20 +105,26 @@ const handleOnChange = (event) =>{
   return (
     <div
       className="container overflow-auto"
-      style={{marginTop:'-60px', maxWidth: "700px", OverflowY: "scroll" }}
+      style={{marginTop:'-130px', maxWidth: "400px", OverflowY: "scroll" }}
     >
-      <h3>SignUp</h3>
-      <hr />
+    
+  
       <div
         className="formContainer"
         style={{
-          border: "solid 1px #eee",
-          borderRadius: "4px",
-          boxShadow:' 0 0 30px #ccc',
-          padding: "18px",
-        }}
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              padding: "18px",
+              boxShadow:'  0 2px 2px 0 #ccc',
+              zIndex:'5000'
+            }}
       >
         <form onSubmit={handleSubmit} >
+        <h2 style={
+              {
+                marginBottom:'20px'
+              }
+            }>SignUp</h2>
           <div className="form-group">
             <label>Name</label>
             <input
@@ -151,7 +157,7 @@ const handleOnChange = (event) =>{
                 onChange={handleOnChange}
                 className="form-control"
               />
-              <span onClick={togglePassword} className="input-group-addon">
+              <span style={{displsay:'flex', paddingRight:'20px'}} onClick={togglePassword} className="input-group-addon">
                 {passwordShown ? (
                   <i className="glyphicon glyphicon-eye-open"></i>
                 ) : (
@@ -170,7 +176,7 @@ const handleOnChange = (event) =>{
                 className="form-control"
                 onChange={event=>setPasswordR(event.target.value)}
               />
-              <span onClick={togglePasswordR} className="input-group-addon">
+              <span style={{displsay:'flex', paddingRight:'20px'}} onClick={togglePasswordR} className="input-group-addon">
                 {passwordShownR ? (
                   <i className="glyphicon glyphicon-eye-open"></i>
                 ) : (
@@ -192,7 +198,7 @@ onDone={({ base64 }) => setUser({ ...user, img: base64 })}
 
           <div style={{ width:"100%", display: "flex", justifyContent: "center" }}>
 
-            <input   style={{width:"90%",marginBottom:'20px',outline:'none'}}  type="submit" value={loading?"Loading...":"SignUP"}  className={`btn + ${loading?'disabled' :null} + btn-primary`} />
+            <input   style={{width:"90%",marginTop:'20px',marginBottom:'20px',outline:'none'}}  type="submit" value={loading?"Loading...":"SignUP"}  className={`btn + ${loading?'disabled' :null} + btn-primary`} />
           </div>
 
         </form>

@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-    <div className="App" style={{height:'10px', width:'100%'}}></div>
+  
     <Router>
     <Dashboard/>
     {token&&<Navbar/>}

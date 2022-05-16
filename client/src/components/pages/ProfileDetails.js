@@ -83,7 +83,7 @@ const ProfileDetails = (props) => {
   }
 
   return (
-    <div style={{marginTop:'-50px'}} className="container">
+    <div style={{marginTop:'-80px'}} className="container">
   <div>
         <h2>{profile.companyName}</h2>
 
@@ -131,7 +131,7 @@ const ProfileDetails = (props) => {
           </Link>
         </div>
       </div>
-      <hr />
+    
     </div>
   );
 };

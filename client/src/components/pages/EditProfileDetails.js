@@ -102,10 +102,10 @@ const handleChange=(event)=> {
   return (
     <div
       className="container overflow-auto"
-      style={{marginTop:'-60px', maxWidth: "700px", OverflowY: "scroll" }}
+      style={{marginTop:'-100px', maxWidth: "350px"}}
     >
-      <h3>Update Profile</h3>
-      <hr />
+      
+    
      {loading?<div style={{ position:'relative', left:'50%'}}><Rings color="#00BFFF" height={80} width={80} /></div>:
 		<div
         className="formContainer"
@@ -116,6 +116,12 @@ const handleChange=(event)=> {
         }}
       >
         <form onSubmit={handleSubmit}>
+        <h2
+        style={
+              {
+                marginBottom:'20px'
+              }
+            }>Update Profile</h2>
           <div class="row">
             <div class="col-xs-5">
               <div className="form-group">

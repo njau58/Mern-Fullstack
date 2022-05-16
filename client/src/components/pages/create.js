@@ -12,8 +12,11 @@ function Create() {
     location: "",
     link: "",
     description: "",
+    category:"IT"
   };
   const [profile, setProfile] = useState(initialState);
+
+  console.log(profile)
 
   const navigate = useNavigate();
   const config={
@@ -75,11 +78,12 @@ function Create() {
   }
 
   return (
-    <div className="container overflow-auto" style={{marginTop:'-60px', maxWidth: "700px", OverflowY: "scroll"  }}>
-      <h3>Create Profile</h3>
-      <hr />
-	<div className="formContainer" style={{ boxShadow:' 0 0 30px #ccc', border:'solid 1px #eee',borderRadius:'4px', padding:'18px'}}>
+    <div className="container overflow-auto" style={{marginTop:'-90px', maxWidth: "350px",   }}>
+    
+     
+	<div className="formContainer" style={{ boxShadow:'  0 2px 2px 0 #ccc', border:'solid 1px #eee',borderRadius:'4px', padding:'18px'}}>
       <form onSubmit={handleSubmit}>
+      <h2 style={{marginBottom:'20px'}}>Create Profile</h2>
         <div class="row">
           <div class="col-xs-5">
             <div className="form-group">
@@ -92,6 +96,21 @@ function Create() {
                 onChange={handleChange}
                 className="form-control"
               />
+            </div>
+          </div>
+          <div class="col-xs-5">
+            <div className="form-group">
+              <label>Category</label>
+              <select  onChange={e=>setProfile({...profile,category:e.target.value})} className="form-select form-select-lg mb-3  ">
+  <option value="IT" selected>IT </option>
+  <option value="BuildingConstruction">Building&Construction</option>
+  <option value="GeneralConsultancy">General Consultancy</option>
+  <option value="HotelHospitality">Hotel&Hospitality</option>
+  <option value="Software">Software</option>
+  <option value="GeneralSupplies">General Supplies</option>
+  <option value="Pharmacy">Pharmaceutical</option>
+</select>
+            
             </div>
           </div>
           <div class="col-xs-7">

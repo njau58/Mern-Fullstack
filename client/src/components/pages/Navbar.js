@@ -3,7 +3,7 @@ import { NavLink } from './NavElements'
 
 const Navbar = () => {
   return (<>
-    <div style={{display:'flex', justifyContent:'flex-start' ,marginTop:'-30px',marginLeft:'80px'}}>
+    <div style={{display:'flex', justifyContent:'flex-start' ,marginTop:'-130px',marginBottom:'100px',marginLeft:'80px'}}>
           <div className="center">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
 
@@ -19,8 +19,7 @@ const Navbar = () => {
         </div>
        
     </div>
-    <hr     style={{ width: "80%",paddingBottom:'10px',marginTop:'0px', marginLeft:'auto',marginRight:'auto', marginBottom:'50px'}}/>
-
+   
     </>
   )
 }

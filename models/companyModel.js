@@ -31,6 +31,10 @@ const companySchema = Schema({
 		type: String,
 		required: [true, "description can't be blank"],
 	},
+	category: {
+		type: String,
+		required: [true, "category can't be blank"],
+	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,

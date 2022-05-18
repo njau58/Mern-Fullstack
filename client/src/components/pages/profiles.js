@@ -14,6 +14,8 @@ import {AiFillFilePdf} from 'react-icons/ai';
 
 
 const Profiles = () => {
+
+  
   const initialCount = {
     software_count: 0,
     IT_count: 0,
@@ -43,6 +45,8 @@ const Profiles = () => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
+
+
 
   useEffect(() => {
     setCategoryCount({
@@ -93,13 +97,9 @@ const Profiles = () => {
         100
       ).toFixed(2),
     });
-  }, []);
+  }, [categoryCount,profilesChart]);
 
-  console.log(profilesChart.length);
-  console.log(
-    profilesChart.filter((profile) => profile.category === "HotelHospitality")
-      .length
-  );
+  
   useEffect(() => {
     let getProfilesChart = async () => {
       try {
@@ -352,9 +352,9 @@ const Profiles = () => {
                         <Link
                           to={`/view-single-profile/${profile._id}`}
                           className="btn btn-info"
-                          style={{ padding: "5px", width: "100px" }}
+                          style={{ color:'white',padding: "5px", width: "100px" }}
                         >
-                          <span class="glyphicon glyphicon-search"></span>
+                          <span style={{color:'white'}} className="glyphicon glyphicon-search"></span>
                           Action
                         </Link>
                       </td>

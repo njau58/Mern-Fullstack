@@ -25,7 +25,7 @@ import {
 
 const charGenerator = ({categoryCount}) => {
 
-    console.log(categoryCount)
+  
     const options = {
         responsive: true,
         plugins: {

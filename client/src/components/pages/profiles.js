@@ -97,7 +97,7 @@ const Profiles = () => {
         100
       ).toFixed(2),
     });
-  }, [categoryCount,profilesChart]);
+  }, [profilesChart]);
 
   
   useEffect(() => {
@@ -207,9 +207,9 @@ const Profiles = () => {
 
           <button
             onClick={() => {
-              setShowSelect(true);
+              setShowSelect(!select);
             }}
-            className={`btn btn-secondary ${disabled ? null : "disabled"}`}
+            className={'btn btn-secondary '}
           >
             Generate PDF <AiFillFilePdf/>
           </button>

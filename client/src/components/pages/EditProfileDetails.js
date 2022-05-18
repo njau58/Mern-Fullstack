@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { get, post } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Rings } from "react-loader-spinner";
+import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 
 function EditProfileDetails(props) {
@@ -108,7 +108,7 @@ const handleChange=(event)=> {
     >
       
     
-     {loading?<div style={{ position:'relative', left:'50%'}}><Rings color="#00BFFF" height={80} width={80} /></div>:
+     {loading?<div style={{ position:'relative', left:'50%'}}><Spinner/></div>:
 		<div
         className="formContainer"
         style={{

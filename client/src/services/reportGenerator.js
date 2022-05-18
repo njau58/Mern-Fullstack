@@ -32,7 +32,7 @@ const generatePDF = tickets =>{
   // ticket title. and margin-top + margin-left
   doc.text("Categories registered within the last one month.", 14, 15);
   // we define the name of our PDF file.
-  doc.save(`report_${dateStr}.pdf`);
+  doc.save(`Categories_report_${dateStr}.pdf`);
 
 }
 

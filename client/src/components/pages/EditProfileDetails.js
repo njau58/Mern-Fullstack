@@ -13,6 +13,8 @@ function EditProfileDetails(props) {
     location: "",
     link: "",
     description: "",
+    category:"IT"
+
   };
   const [profile, setProfile] = useState(initialState);
   const [loading, setLoading] = useState(true);
@@ -136,6 +138,21 @@ const handleChange=(event)=> {
                 />
               </div>
             </div>
+            <div class="col-xs-5">
+            <div className="form-group">
+              <label>Category</label>
+              <select  onChange={e=>setProfile({...profile,category:e.target.value})} className="form-select form-select-lg mb-3  ">
+  <option value={profile.category} selected> {profile.category}</option>
+  <option value="BuildingConstruction">Building&Construction</option>
+  <option value="GeneralConsultancy">General Consultancy</option>
+  <option value="HotelHospitality">Hotel&Hospitality</option>
+  <option value="Software">Software</option>
+  <option value="GeneralSupplies">General Supplies</option>
+  <option value="Pharmacy">Pharmaceutical</option>
+</select>
+            
+            </div>
+          </div>
             <div class="col-xs-7">
               {" "}
               <div className="form-group">

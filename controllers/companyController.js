@@ -132,7 +132,7 @@ q=''
   if (!data) {
     throw new Error("Error fetching data.");
   }
-  console.log(data)
+
 
   res.set("x-total-count", totalCount);
   res.json(data);

@@ -103,12 +103,12 @@ const handleChange=(event)=> {
 
   return (
     <div
-      className="container overflow-auto"
+      className="container"
       style={{marginTop:'-100px', maxWidth: "350px"}}
     >
       
     
-     {loading?<div style={{ position:'relative', left:'50%'}}><Spinner/></div>:
+     {loading?<div style={{margin:'70px auto'}}><Spinner/></div>:
 		<div
         className="formContainer"
         style={{

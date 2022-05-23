@@ -63,7 +63,7 @@ const Profiles = () => {
         100
       ).toFixed(2),
       general_supplies_count: (
-        (profiles.filter((profile) => profile.category === "GeneralSupplies")
+        (profilesChart.filter((profile) => profile.category === "GeneralSupplies")
           .length /
           profilesChart.length) *
         100
@@ -97,7 +97,7 @@ const Profiles = () => {
         100
       ).toFixed(2),
     });
-  }, [profilesChart]);
+  }, [profilesChart,categoryCount]);
 
   
   useEffect(() => {
@@ -113,7 +113,7 @@ const Profiles = () => {
     };
 
     getProfilesChart();
-  }, [profilesChart]);
+  }, [profilesChart,config]);
 
   useEffect(() => {
     let getProfiles = async () => {
